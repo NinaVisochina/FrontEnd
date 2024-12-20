@@ -1,7 +1,8 @@
 import React from "react";
 import Home from "./pages/Home";
-import CreateCategory from "./pages/CreateCategory";
+import CreateCategory from "./components/Category/CreateCategory";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import EditCategory from "./components/Category/EditCategory";
 
 const App: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<CreateCategory />} />
+          <Route path="/edit/:id" element={<EditCategory />} />
         </Routes>
       </div>
     </Router>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { ICategoryCreate } from "../types/CategoryCreate";
+import { ICategoryCreate } from "../../Interface/CategoryCreate";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "../env";
+import { API_URL } from "../../env";
 
 const CreateCategory: React.FC = () => {
   const [name, setName] = useState<string>("");
