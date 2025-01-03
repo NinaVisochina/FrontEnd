@@ -1,8 +1,8 @@
-import { IProductDescImage } from "./IProductDescImage";
+//import { IProductDescImage } from "./IProductDescImage";
 
 
-export interface IProduct {
-    productId: number;
+export interface IProductItem {
+    id: number;
     code: string;
     name: string;
     description?: string;
@@ -17,6 +17,5 @@ export interface IProduct {
     model?: string;
     subCategoryId: number;
     images: string[];
-    productDescImages?: IProductDescImage[];
+    //productDescImages?: IProductDescImage[];
   }
-  

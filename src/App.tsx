@@ -23,7 +23,8 @@ const App: React.FC = () => {
           <Route path="/edit-subcategory/:id" element={<EditSubCategory />} />
           <Route path="/products/subcategory/:subCategoryId" element={<ProductsPage />} />
           <Route path="/create-product" element={<CreateProductPage />} />
-          <Route path="/product/:productId" element={<ProductDetailsPage />} />
+          <Route path="/product/:id" element={<ProductDetailsPage />} />
+          <Route path="/product" element={<ProductsPage />} /> 
         </Routes>
       </div>
     </Router>

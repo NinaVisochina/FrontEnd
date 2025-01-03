@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { IProduct } from "../../Interface/IProduct";
+import { IProductItem } from "../../Interface/IProductItem";
 import { API_URL } from "../../env";
 
 const ProductDetailsPage: React.FC = () => {
-  const { productId } = useParams<{ productId: string }>();
-  const [product, setProduct] = useState<IProduct | null>(null);
+  const { id } = useParams<{ id: string }>();
+  const [product, setProduct] = useState<IProductItem | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/product/${productId}`);
+        const response = await fetch(`${API_URL}/api/product/${id}`);
         if (!response.ok) throw new Error("Продукт не знайдено");
-        const data: IProduct = await response.json();
+        const data: IProductItem = await response.json();
         setProduct(data);
       } catch (err) {
         console.error("Помилка:", err);
@@ -25,7 +25,7 @@ const ProductDetailsPage: React.FC = () => {
     };
 
     fetchProduct();
-  }, [productId]);
+  }, [id]);
 
   if (loading) return <p>Завантаження...</p>;
   if (error) return <p>{error}</p>;

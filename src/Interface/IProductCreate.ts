@@ -4,5 +4,6 @@ export interface IProductCreate {
     price: number;
     quantityInStock: number;
     subCategoryId: number;
-    images: File[]; // Необов'язковий масив файлів
+    images: File[]; 
+    //images: File[]|null// Необов'язковий масив файлів
 }

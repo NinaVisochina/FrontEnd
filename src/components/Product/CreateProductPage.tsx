@@ -124,7 +124,7 @@ export default CreateProductPage;
 // import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import { API_URL } from "../../env";
-// import { IProductCreate } from "../../Interface/ICreateProduct";
+// import { IProductCreate } from "../../Interface/IProductCreate";
 
 // const CreateProductPage: React.FC = () => {
 //     const [formData, setFormData] = useState<IProductCreate>({
@@ -133,189 +133,159 @@ export default CreateProductPage;
 //         price: 0,
 //         quantityInStock: 0,
 //         subCategoryId: 0,
-//         images: [] as File[],
-//         //images: [], // Початково порожній масив
-//       });
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState<string | null>(null);
-//   const navigate = useNavigate();
+//         images: [] as File[], // Масив файлів
+//     });
+//     const [loading, setLoading] = useState(false);
+//     const [error, setError] = useState<string | null>(null);
+//     const navigate = useNavigate();
 
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-//     const { name, value } = e.target;
-//     setFormData((prev) => ({
-//       ...prev,
-//       [name]: value,
-//     }));
-//   };
+//     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+//         const { name, value } = e.target;
+//         setFormData((prev) => ({
+//             ...prev,
+//             [name]: value,
+//         }));
+//     };
 
-//   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const files = e.target.files;
-//     if (files) {
-//       setFormData((prev) => ({
-//         ...prev,
-//         images: Array.from(files), // Перетворення FileList у масив файлів
-//       }));
-//     } else {
-//       setFormData((prev) => ({
-//         ...prev,
-//         images: [], // Якщо файлів немає
-//       }));
-//     }
-//   };
-//   //   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-// //     const files = e.target.files;
-// //     if (files) {
-// //       setFormData((prev) => ({
-// //         ...prev,
-// //         images: Array.from(files), // Зберігаємо масив файлів
-// //       }));
-// //     }
-// //   };
-  
+//     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//         const files = e.target.files;
+//         if (files) {
+//             setFormData((prev) => ({
+//                 ...prev,
+//                 images: Array.from(files), // Перетворення FileList у масив файлів
+//             }));
+//         }
+//     };
+   
+//     // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     //     const files = e.target.files;
+//     //     if (files) {
+//     //       const validFiles = Array.from(files).filter(file =>
+//     //         file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/webp"
+//     //       );
+      
+//     //       setFormData((prev) => ({
+//     //         ...prev,
+//     //         images: validFiles,
+//     //       }));
+//     //     }
+//     //   };
+      
+//     const handleSubmit = async (e: React.FormEvent) => {
+//         e.preventDefault();
+//         setLoading(true);
+//         setError(null);
 
-//   const handleSubmit = async (e: React.FormEvent) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setError(null);
-//     // Перевірка обов'язкових полів
-//     if (!formData.name.trim()) {
-//       alert("Назва продукту є обов'язковою.");
-//       setLoading(false);
-//       return;
-//     }
-//     if (formData.price <= 0) {
-//       alert("Ціна повинна бути більше 0.");
-//       setLoading(false);
-//       return;
-//     }
-//     if (formData.quantityInStock <= 0) {
-//       alert("Кількість на складі повинна бути більше 0.");
-//       setLoading(false);
-//       return;
-//     }
-//     if (!formData.subCategoryId) {
-//       alert("Підкатегорія є обов'язковою.");
-//       setLoading(false);
-//       return;
-//     }
-  
-//     const formDataToSend = new FormData();
-//     formDataToSend.append("name", formData.name);
-//     //formDataToSend.append("description", formData.description || "");
-//     formDataToSend.append("price", formData.price.toString());
-//     formDataToSend.append("quantityInStock", formData.quantityInStock.toString());
-//     formDataToSend.append("subCategoryId", formData.subCategoryId.toString());
-  
-//     formData.images.forEach((file) => formDataToSend.append("images", file));
-//     for (let [key, value] of formDataToSend.entries()) {
-//         console.log(`${key}:`, value);
-//     }
-//     try {
-//       const response = await fetch(`${API_URL}/api/product`, {
-//         method: "POST",
-//         body: formDataToSend,
-//       });
-  
-//       if (!response.ok) throw new Error("Помилка створення продукту");
-//       //const createdProduct = await response.json();
-//       alert("Продукт успішно створено!");
-//       //navigate("/");
-//     //   setFormData({
-//     //     name: "",
-//     //     description: "",
-//     //     price: 0,
-//     //     quantityInStock: 0,
-//     //     subCategoryId: 0,
-//     //     images: [],
-//     //   });
-//     } catch (error) {
-//       console.error("Помилка:", error);
-//       alert("Не вдалося створити продукт.");
-//     }finally {
-//               setLoading(false);
-//             }
-//   };
-  
-  
+//         // Формування FormData
+//         const formDataToSend = new FormData();
+//         formDataToSend.append("name", formData.name);
+//         formDataToSend.append("description", formData.description || "");
+//         formDataToSend.append("price", formData.price.toString());
+//         formDataToSend.append("quantityInStock", formData.quantityInStock.toString());
+//         formDataToSend.append("subCategoryId", formData.subCategoryId.toString());
 
-//   return (
-//     <div className="container mx-auto p-4">
-//       <h1 className="text-2xl font-bold mb-4">Створення продукту</h1>
-//       {error && <p className="text-red-500">{error}</p>}
-//       <form onSubmit={handleSubmit}>
-//         <div className="mb-4">
-//           <label className="block text-gray-700">Назва</label>
-//           <input
-//             type="text"
-//             name="name"
-//             value={formData.name}
-//             onChange={handleChange}
-//             className="border rounded-lg w-full p-2"
-//             required
-//           />
+//         // Додавання файлів як "images[]"
+//         formData.images.forEach((file) => {
+//             formDataToSend.append("images[]", file); // Використовуємо назву "images[]", як у Swagger
+//         });
+
+//         try {
+//             const response = await fetch(`${API_URL}/api/product`, {
+//                 method: "POST",
+//                 body: formDataToSend,
+//             });
+
+//             if (!response.ok) throw new Error("Помилка створення продукту");
+
+//             alert("Продукт успішно створено!");
+//             navigate("/products");
+//         } catch (error) {
+//             console.error("Помилка:", error);
+//             alert("Не вдалося створити продукт.");
+//         } finally {
+//             setLoading(false);
+//         }
+//     };
+
+//     return (
+//         <div className="container mx-auto p-4">
+//             <h1 className="text-2xl font-bold mb-4">Створення продукту</h1>
+//             {error && <p className="text-red-500">{error}</p>}
+//             <form onSubmit={handleSubmit}>
+//                 <div className="mb-4">
+//                     <label className="block text-gray-700">Назва</label>
+//                     <input
+//                         type="text"
+//                         name="name"
+//                         value={formData.name}
+//                         onChange={handleChange}
+//                         className="border rounded-lg w-full p-2"
+//                         required
+//                     />
+//                 </div>
+//                 <div className="mb-4">
+//                     <label className="block text-gray-700">Опис</label>
+//                     <textarea
+//                         name="description"
+//                         value={formData.description}
+//                         onChange={handleChange}
+//                         className="border rounded-lg w-full p-2"
+//                     />
+//                 </div>
+//                 <div className="mb-4">
+//                     <label className="block text-gray-700">Ціна</label>
+//                     <input
+//                         type="number"
+//                         name="price"
+//                         value={formData.price}
+//                         onChange={handleChange}
+//                         className="border rounded-lg w-full p-2"
+//                         required
+//                     />
+//                 </div>
+//                 <div className="mb-4">
+//                     <label className="block text-gray-700">Кількість на складі</label>
+//                     <input
+//                         type="number"
+//                         name="quantityInStock"
+//                         value={formData.quantityInStock}
+//                         onChange={handleChange}
+//                         className="border rounded-lg w-full p-2"
+//                         required
+//                     />
+//                 </div>
+//                 <div className="mb-4">
+//                     <label className="block text-gray-700">Підкатегорія</label>
+//                     <input
+//                         type="number"
+//                         name="subCategoryId"
+//                         value={formData.subCategoryId}
+//                         onChange={handleChange}
+//                         className="border rounded-lg w-full p-2"
+//                         required
+//                     />
+//                 </div>
+//                 <div className="mb-4">
+//                     <label className="block text-gray-700">Зображення</label>
+//                     <input
+//                         type="file"
+//                         name="images"
+//                         multiple
+//                         onChange={handleFileChange}
+//                         className="border rounded-lg w-full p-2"
+//                     />
+//                 </div>
+//                 <button
+//                     type="submit"
+//                     className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+//                     disabled={loading}
+//                 >
+//                     {loading ? "Завантаження..." : "Створити"}
+//                 </button>
+//             </form>
 //         </div>
-//         <div className="mb-4">
-//           <label className="block text-gray-700">Опис</label>
-//           <textarea
-//             name="description"
-//             value={formData.description}
-//             onChange={handleChange}
-//             className="border rounded-lg w-full p-2"
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label className="block text-gray-700">Ціна</label>
-//           <input
-//             type="number"
-//             name="price"
-//             value={formData.price}
-//             onChange={handleChange}
-//             className="border rounded-lg w-full p-2"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label className="block text-gray-700">Кількість на складі</label>
-//           <input
-//             type="number"
-//             name="quantityInStock"
-//             value={formData.quantityInStock}
-//             onChange={handleChange}
-//             className="border rounded-lg w-full p-2"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label className="block text-gray-700">Підкатегорія</label>
-//           <input
-//             type="number"
-//             name="subCategoryId"
-//             value={formData.subCategoryId}
-//             onChange={handleChange}
-//             className="border rounded-lg w-full p-2"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label className="block text-gray-700">Зображення</label>
-//           <input
-//             type="file"
-//             name="images"
-//             multiple
-//             onChange={handleFileChange}
-//             className="border rounded-lg w-full p-2"
-//           />
-//         </div>
-//         <button
-//           type="submit"
-//           className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-//           disabled={loading}
-//         >
-//           {loading ? "Завантаження..." : "Створити"}
-//         </button>
-//       </form>
-//     </div>
-//   );
+//     );
 // };
 
 // export default CreateProductPage;
+
